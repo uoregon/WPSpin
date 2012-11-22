@@ -2,7 +2,6 @@ var Playlist = Playlist || {};
 
 var View = Playlist.View; //require('./view');
 var template = Playlist.Template;//require('./templates/listen');
-var Playlist = Playlist.PlaylistCollection; //require('../models/playlist_collection');
 var playlistTemplate = Playlist.PlaylistItem; //require('./templates/playlist_item');
 
 
@@ -16,7 +15,7 @@ Playlist.Listen = View.extend({
 		_.bindAll(this, "render");
 		Backbone.Mediator.sub("listen:load", this.render, this);
 		Backbone.Mediator.sub("listen:playlist:update", this.updatePlaylist, this);
-		var playlist = new Playlist();
+		var playlist = new Playlist.PlaylistCollection();
 		this.collectionPromise = playlist.loadData();
 		playlist.startTimer();
 	},
