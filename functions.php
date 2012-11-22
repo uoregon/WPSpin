@@ -25,10 +25,40 @@
 
 require_once 'kwva-playlist.php';
 
-function register_kwva_playlist_widget() {
-	register_widget('KWVAPlaylist');
+function init_kwva_widget() {
+	register_widget("KWVAPlaylist\KWVAPlaylist");
 }
 
-add_action( 'widgets_init', 'register_kwva_playlist_widget' );
+add_action( 'widgets_init', 'KWVAPlaylist\init_kwva_widget');
+
+function script_registry($name_location_array) {
+	foreach ($name_location_array as $name => $location) {
+		wp_deregister_script($name);	
+		wp_register_script($name, $location);
+		wp_enqueue_script($name);
+	}
+}
+
+
+function playlist_scripts() {
+	$url = plugins_url('kwva-playlist');
+	$scripts_array = array(
+	    "underscore" => 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js',
+	    "backbone" => 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js',
+	    "backbone-mediator" => $url . '/assets/backbone-mediator.js',
+	    "collection" => $url . '/assets/collection.js',
+	    "model" => $url . '/assets/model.js',
+	    "view" => $url . '/assets/view.js',
+	    "song_model" => $url . '/assets/song_model.js',
+	    "playlist_item" => $url . '/assets/playlist_item.js',
+	    "playlist_collection" => $url . '/assets/playlist_collection.js',
+	    "listen_view" => $url . '/assets/listen_view.js',
+	    );
+	script_registry($scripts_array);
+
+}    
+ 
+add_action('wp_enqueue_scripts', 'KWVAPlaylist\playlist_scripts');
+
 
 ?>
