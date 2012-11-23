@@ -2,6 +2,7 @@ var Playlist = Playlist || {};
 
 var Collection = Playlist.Collection; //require('./collection');
 var SongModel = Playlist.SongModel; //require('./song_model');
+var $ = jQuery;
 
 Playlist.PlaylistCollection = Collection.extend({
 	model: SongModel,

@@ -1,9 +1,9 @@
 <?php namespace KWVAPlaylist;
    /*
    Plugin Name: KWVA Playlist
-   Plugin URI: http://github.com/emumark/REPONAMEHERE
+   Plugin URI: http://github.com/emumark/kwva-playlist
    Description: Provides the playlist for KWVA as fed from Spinitron
-   Version: 0.1
+   Version: 0.5
    Author: Michael A Tomcal - University of Oregon - EMU Marketing
    Author URI: http://marketing.uoregon.edu
    License: GPL2
@@ -34,7 +34,7 @@ add_action( 'widgets_init', 'KWVAPlaylist\init_kwva_widget');
 function script_registry($name_location_array) {
 	foreach ($name_location_array as $name => $location) {
 		wp_deregister_script($name);	
-		wp_register_script($name, $location);
+		wp_register_script($name, $location, array('jquery'));
 		wp_enqueue_script($name);
 	}
 }

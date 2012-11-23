@@ -8,7 +8,7 @@ class KWVAPlaylist extends \WP_Widget {
 	        'KWVA Playlist',
 		array(
 		    'classname' => 'kwva_playlist',
-		    'description' => __('Use this widget For KWVA Playlist Updates From Spinitron'),
+		    'description' => __('Use this widget For KWVA Playlist Updates From The Spinitron RSS Feed'),
 		    )
 		);
 	}

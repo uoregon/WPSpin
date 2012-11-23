@@ -1,5 +1,6 @@
 var Playlist = Playlist || {};
 // Base class for all views.
+var $ = jQuery;
 
 Playlist.View = Backbone.View.extend({
   initialize: function() {
