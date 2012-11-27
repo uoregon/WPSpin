@@ -19,7 +19,7 @@ class KWVAPlaylist extends \WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-		echo '<div class="kwva-playlist-items"></div>';
+		echo '<section class="kwva-playlist-items"></section>';
 		echo $after_widget;
 	}
 
