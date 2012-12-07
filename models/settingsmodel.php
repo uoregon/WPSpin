@@ -7,7 +7,7 @@
 
 class SettingsModel implements ModelInterface {
 
-  public static function admin_init() {
+  public static function adminInit() {
     global $wpdb;
 
     $sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (

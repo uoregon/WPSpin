@@ -42,9 +42,9 @@ global $wpdb;
 
 define("TABLE_NAME", $wpdb->prefix.'wpspin');
 
-add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::init_playlist_widget');
+add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::initPlaylistWidget');
 
-function script_registry($name_location_array) {
+function scriptRegistry($name_location_array) {
 	foreach ($name_location_array as $name => $location) {
 		wp_deregister_script($name);	
 		wp_register_script($name, $location, array('jquery'));
@@ -53,7 +53,7 @@ function script_registry($name_location_array) {
 }
 
 
-function playlist_scripts() {
+function playlistScripts() {
 	$url = plugins_url('WPSpin');
 	$scripts_array = array(
 	    "underscore" => 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js',
@@ -67,21 +67,21 @@ function playlist_scripts() {
 	    "playlist_collection" => $url . '/assets/playlist_collection.js',
 	    "listen_view" => $url . '/assets/listen_view.js',
 	    );
-	script_registry($scripts_array);
+	scriptRegistry($scripts_array);
 
 }    
  
-add_action('wp_enqueue_scripts', 'WPSpin\playlist_scripts');
+add_action('wp_enqueue_scripts', 'WPSpin\playlistScripts');
 
 // Admin menu registration
 
 /**
  * Register menu item functions with WordPress
  */
-function wpspin_admin_menu(){
-    add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", "WPSpin\SettingsModel::admin_init", "", 25);
+function wpspinAdminMenu(){
+    add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", "WPSpin\SettingsModel::adminInit", "", 25);
 }
 
-add_action("admin_menu", "WPSpin\wpspin_admin_menu");
+add_action("admin_menu", "WPSpin\wpspinAdminMenu");
 
 ?>
