@@ -29,6 +29,10 @@
 
 require_once 'playlist.php';
 
+global $wpdb;
+
+define("TABLE_NAME", $wpdb->prefix.'wpspin');
+
 function init_playlist_widget() {
 	register_widget("WPSpin\WPSPlaylist");
 }
@@ -64,5 +68,16 @@ function playlist_scripts() {
  
 add_action('wp_enqueue_scripts', 'WPSpin\playlist_scripts');
 
+// Admin menu registration
+require("admin_pages.php");
+
+/**
+ * Register menu item functions with WordPress
+ */
+function wpspin_admin_menu(){
+    add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", "WPSpin\admin_page", "", 25);
+}
+
+add_action("admin_menu", "WPSpin\wpspin_admin_menu");
 
 ?>
