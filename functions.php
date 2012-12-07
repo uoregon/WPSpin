@@ -27,17 +27,22 @@
    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-require_once 'playlist.php';
+//Model Requires
+require_once 'models/modelinterface.php';
+require_once 'models/settingsmodel.php';
+
+//Controller Requires
+require_once 'controllers/controllerinterface.php';
+
+//ViewModel Requires
+require_once 'viewmodels/viewmodelinterface.php';
+require_once 'viewmodels/playlistwidgetview.php';
 
 global $wpdb;
 
 define("TABLE_NAME", $wpdb->prefix.'wpspin');
 
-function init_playlist_widget() {
-	register_widget("WPSpin\WPSPlaylist");
-}
-
-add_action( 'widgets_init', 'WPSpin\init_playlist_widget');
+add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::init_playlist_widget');
 
 function script_registry($name_location_array) {
 	foreach ($name_location_array as $name => $location) {
@@ -69,13 +74,12 @@ function playlist_scripts() {
 add_action('wp_enqueue_scripts', 'WPSpin\playlist_scripts');
 
 // Admin menu registration
-require("admin_pages.php");
 
 /**
  * Register menu item functions with WordPress
  */
 function wpspin_admin_menu(){
-    add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", "WPSpin\admin_page", "", 25);
+    add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", "WPSpin\SettingsModel::admin_init", "", 25);
 }
 
 add_action("admin_menu", "WPSpin\wpspin_admin_menu");

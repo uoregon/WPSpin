@@ -9,7 +9,7 @@ var $ = jQuery;
 
 Playlist.Listen = View.extend({
 	el: "body",
-	playlist_el: ".kwva-playlist-items",
+	playlist_el: ".wps-playlist-items",
 	playlist_template: _.template(playlistTemplate),
 	
 	initialize: function () {

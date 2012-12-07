@@ -1,6 +1,6 @@
 <?php namespace WPSpin;
 
-class WPSPlaylist extends \WP_Widget { 
+class PlaylistWidgetView extends \WP_Widget { 
 
 	public function __construct() {
 		parent::__construct( 
@@ -19,7 +19,7 @@ class WPSPlaylist extends \WP_Widget {
 		echo $before_widget;
 		if ( ! empty( $title ) )
 			echo $before_title . $title . $after_title;
-		echo '<section class="kwva-playlist-items"></section>';
+		echo '<section class="wps-playlist-items"></section>';
 		echo $after_widget;
 	}
 
@@ -31,5 +31,9 @@ class WPSPlaylist extends \WP_Widget {
 
 	}
 
+  public static function init_playlist_widget() {
+    register_widget("WPSpin\PlaylistWidgetView");
+  }
 }
+
 ?>
