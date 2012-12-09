@@ -2,3 +2,4 @@
 /nbproject
 *.swp
 config.php
+/spinpapi/tmp/*
