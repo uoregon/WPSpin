@@ -1,0 +1,48 @@
+Installing memcached daemon and Memcached pecl PHP client API on OS X 10.6
+
+These instructions derived from 
+http://www.glenscott.co.uk/blog/2009/08/30/install-memcached-php-extension-on-os-x-snow-leopard/
+
+# as a normal user
+cd ~
+mkdir memcached-install
+cd memcached-install
+
+# look for more up-to-date stable versions. these were from 2010-11-05:
+curl -O http://www.monkey.org/~provos/libevent-1.4.13-stable.tar.gz
+curl -O http://memcached.googlecode.com/files/memcached-1.4.5.tar.gz
+curl -O http://download.tangent.org/libmemcached-0.43.tar.gz
+pecl download memcached
+
+tar xfz *z
+
+cd libevent-1.4.13-stable
+./configure; make
+sudo make install
+
+cd ../memcached-1.4.5
+./configure; make
+sudo make install
+
+cd ../libmemcached-0.43
+./configure; make
+sudo make install
+
+cd ../memcached-1.0.2
+phpize
+./configure; make
+sudo make install
+# make install says something like:
+# Installing shared extensions: /usr/lib/php/extensions/no-debug-non-zts-20090626/
+# so add the path to the new memcached.so to /etc/php.ini, e.g.
+extension=/usr/lib/php/extensions/no-debug-non-zts-20090626/memcached.so
+
+sudo apachectl graceful
+php -i | grep memcache
+
+To run memcached automatically as a daemon, edit the job file:
+    /System/Library/LaunchDaemons/com.danga.memcached.plist
+and modify the value of Disabled to false. Make any other changed you need (see
+memcached(8) for options) and then:
+sudo launchctl load /System/Library/LaunchDaemons/com.danga.memcached.plist
+The daemon should start automatically during system boot.

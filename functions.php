@@ -27,9 +27,14 @@
    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+//SpinPapi Requires
+require_once 'spinpapi/SpinPapiClient.inc.php';
+
 //Model Requires
-require_once 'models/modelinterface.php';
+require_once 'models/spinconnectsingleton.php';
+require_once 'models/modelabstract.php';
 require_once 'models/settingsmodel.php';
+require_once 'models/songmodel.php';
 
 //Controller Requires
 require_once 'controllers/controllerinterface.php';
@@ -41,6 +46,8 @@ require_once 'viewmodels/playlistwidgetview.php';
 global $wpdb;
 
 define("TABLE_NAME", $wpdb->prefix.'wpspin');
+
+SongModel::getNowPlaying();
 
 add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::initPlaylistWidget');
 

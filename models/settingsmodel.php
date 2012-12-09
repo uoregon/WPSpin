@@ -5,7 +5,7 @@
  * @global type $wpdb
  */
 
-class SettingsModel implements ModelInterface {
+class SettingsModel extends ModelAbstract {
 
   public static function adminInit() {
     global $wpdb;

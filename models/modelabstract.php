@@ -1,6 +1,6 @@
 <?php namespace WPSpin;
 
-interface ModelInterface {
+abstract class ModelAbstract {
 
 }
 
