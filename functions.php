@@ -31,23 +31,23 @@
 require_once 'spinpapi/SpinPapiClient.inc.php';
 
 //Model Requires
+require_once 'models/apiaccessinterface.php';
+require_once 'models/dbaccessinterface.php';
 require_once 'models/spinconnectsingleton.php';
 require_once 'models/modelabstract.php';
 require_once 'models/settingsmodel.php';
 require_once 'models/songmodel.php';
+require_once 'models/playlistmodel.php';
 
 //Controller Requires
-require_once 'controllers/controllerinterface.php';
+require_once 'controllers/controllerabstract.php';
+require_once 'controllers/playlistcontroller.php';
 
 //ViewModel Requires
 require_once 'viewmodels/viewmodelinterface.php';
 require_once 'viewmodels/playlistwidgetview.php';
 
 global $wpdb;
-
-define("TABLE_NAME", $wpdb->prefix.'wpspin');
-
-SongModel::getNowPlaying();
 
 add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::initPlaylistWidget');
 
@@ -56,6 +56,7 @@ function scriptRegistry($name_location_array) {
 		wp_deregister_script($name);	
 		wp_register_script($name, $location, array('jquery'));
 		wp_enqueue_script($name);
+    wp_localize_script( $name, 'WPSpinAjax', array( url => admin_url( 'admin-ajax.php' ) ) );
 	}
 }
 
@@ -90,5 +91,20 @@ function wpspinAdminMenu(){
 }
 
 add_action("admin_menu", "WPSpin\wpspinAdminMenu");
+function retrievePlaylist() {
+    $response = json_encode(PlaylistModel::getPlaylistSongs());
+    header( "Content-Type: application/json" );
+    echo $response;
+    die();
+}
+add_action( 'wp_ajax_nopriv_retrieve-playlist', 'WPSpin\retrievePlaylist' );
+
+//Initialize Controllers
+
+PlaylistController::initActions();
 
 ?>
+
+
+
+

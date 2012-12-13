@@ -5,12 +5,20 @@
  * @global type $wpdb
  */
 
-class SettingsModel extends ModelAbstract {
+require_once dirname(__FILE__) . '/../config.php';
 
+
+class SettingsModel extends ModelAbstract implements DBAccessInterface 
+{
   public static function adminInit() {
-    global $wpdb;
+    self::dbInit();
+  }
 
-    $sql = sprintf("CREATE TABLE IF NOT EXISTS `%s` (
+  public static function dbInit() {
+    global $wpdb;
+    global $table_prefix;
+
+    $sql = sprintf('CREATE TABLE IF NOT EXISTS `%s` (
       `showID` int PRIMARY KEY,
       `showName` VARCHAR(64) NOT NULL,
       `description` TEXT,
@@ -18,7 +26,7 @@ class SettingsModel extends ModelAbstract {
       `twitter` VARCHAR(32),
       `facebook` VARCHAR(128),
       `website` VARCHAR(128),
-      `active` BOOLEAN NOT NULL);", TABLE_NAME);
+      `active` BOOLEAN NOT NULL);', $wpdb->prefix . $table_prefix . '_settings');
 
     $query = $wpdb->prepare($sql);
     $wpdb->query($query);
