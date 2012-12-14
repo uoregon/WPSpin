@@ -57,7 +57,7 @@ function scriptRegistry($name_location_array) {
 		wp_register_script($name, $location, array('jquery'));
 		wp_enqueue_script($name);
     wp_localize_script( $name, 'WPSpinAjax', array( url => admin_url( 'admin-ajax.php' ) ) );
-	}
+  }
 }
 
 
@@ -91,13 +91,6 @@ function wpspinAdminMenu(){
 }
 
 add_action("admin_menu", "WPSpin\wpspinAdminMenu");
-function retrievePlaylist() {
-    $response = json_encode(PlaylistModel::getPlaylistSongs());
-    header( "Content-Type: application/json" );
-    echo $response;
-    die();
-}
-add_action( 'wp_ajax_nopriv_retrieve-playlist', 'WPSpin\retrievePlaylist' );
 
 //Initialize Controllers
 

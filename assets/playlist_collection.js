@@ -7,22 +7,22 @@ var $ = jQuery;
 Playlist.PlaylistCollection = Collection.extend({
 	model: SongModel,
 	initialize: function () {
-		_.bindAll(this, "_loadCollection", "loadData", "_loadYQL");
+		_.bindAll(this, "_loadCollection", "loadData", "_loadAjax");
 	},
 	
 	loadData: function () {
-		return this._loadCollection(this._loadYQL());
+		return this._loadCollection(this._loadAjax());
 	},
 	
 	startTimer: function() {
 		this._timer();
 	},
 	
-	_loadYQL: function () {
-		var url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url=%22http://spinitron.com/radio/rss.php?station=kwva%22&format=json";
-		var xmlPromise = $.getJSON(url);
+	_loadAjax: function () {
+		var url = WPSpinAjax.url;
+		var xmlPromise = $.post(url, {action: 'retrieve-playlist'});
 		xmlPromise = xmlPromise.pipe(function (data) {
-			return data.query.results.rss.channel.item;
+			return JSON.parse(data);
 		});
 		return xmlPromise; 
 	},
@@ -42,32 +42,25 @@ Playlist.PlaylistCollection = Collection.extend({
 	
 	_initLoad: function (data) {
 		var _self = this;
-		data = _.first(data, 10);
 		_self.reset(data);
 	},
 	
 	_updateLoad: function (data) {
-		data = _.first(data, 10);
-		
 		var _self = this;
-		var timestamp = _self.first().get("pubDate");
-		_self.reset(data);
-		
-		var new_items = [];
-		_.each(data, function(item) {
-			if(Date.parse(timestamp) < Date.parse(item.pubDate)) {
-				new_items.push(item);
-			} else {
-			}
-		});
-		Backbone.Mediator.pub("listen:playlist:update", new_items);
-	},
-	
-	_timer: function () {
-		var _self = this;
-		setInterval(function() {
-			_self._loadCollection(_self._loadYQL());
-		}, 30000);
-	}
-	
+    var timestamp = _self.first().get("Date") + " " + _self.first().get("Timestamp");
+    _self.reset(data);
+    var new_timestamp = _self.first().get("Date") + " " + _self.first().get("Timestamp");
+    if(Date.parse(timestamp) < Date.parse(new_timestamp)) {
+      Backbone.Mediator.pub("listen:playlist:update");
+      return;
+    }
+  },
+
+  _timer: function () {
+    var _self = this;
+    setInterval(function() {
+      _self._loadCollection(_self._loadAjax());
+    }, 30000);
+  }
+
 });
