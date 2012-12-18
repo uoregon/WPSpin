@@ -10,8 +10,7 @@ class PlaylistController extends ControllerAbstract
 
   public static function retrievePlaylist()
   {
-    $response = trim(json_encode(PlaylistModel::getPlaylistSongs()));
-    header( "Content-Type: application/json" );
+    $response = json_encode(PlaylistModel::getPlaylistSongs());
     echo $response;
     die();
   }

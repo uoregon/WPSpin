@@ -33,9 +33,9 @@ require_once 'spinpapi/SpinPapiClient.inc.php';
 //Model Requires
 require_once 'models/apiaccessinterface.php';
 require_once 'models/dbaccessinterface.php';
-require_once 'models/spinconnectsingleton.php';
 require_once 'models/modelabstract.php';
 require_once 'models/settingsmodel.php';
+require_once 'models/spinconnectsingleton.php';
 require_once 'models/songmodel.php';
 require_once 'models/playlistmodel.php';
 
@@ -46,6 +46,7 @@ require_once 'controllers/playlistcontroller.php';
 //ViewModel Requires
 require_once 'viewmodels/viewmodelinterface.php';
 require_once 'viewmodels/playlistwidgetview.php';
+require_once 'viewmodels/settingsview.php';
 
 global $wpdb;
 
@@ -86,18 +87,24 @@ add_action('wp_enqueue_scripts', 'WPSpin\playlistScripts');
 /**
  * Register menu item functions with WordPress
  */
-function wpspinAdminMenu(){
-    add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", "WPSpin\SettingsModel::adminInit", "", 25);
+
+global $settings;
+
+function adminMenu()
+{
+  global $settings;
+  $settings = new SettingsView('WPSpin\renderSettings');
 }
 
-add_action("admin_menu", "WPSpin\wpspinAdminMenu");
+function renderSettings()
+{
+  global $settings;
+  $settings->render();
+}
+
+add_action("admin_menu", 'WPSpin\adminMenu');
 
 //Initialize Controllers
 
 PlaylistController::initActions();
-
 ?>
-
-
-
-

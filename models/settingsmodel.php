@@ -5,33 +5,54 @@
  * @global type $wpdb
  */
 
-require_once dirname(__FILE__) . '/../config.php';
-
-
-class SettingsModel extends ModelAbstract implements DBAccessInterface 
+class SettingsModel extends ModelAbstract 
 {
-  public static function adminInit() {
-    self::dbInit();
+
+  public static function getApiKey() {
+    $options = get_option('wpspin_setting_fields');
+    return $options['apikey'];
   }
 
-  public static function dbInit() {
-    global $wpdb;
-    global $table_prefix;
-
-    $sql = sprintf('CREATE TABLE IF NOT EXISTS `%s` (
-      `showID` int PRIMARY KEY,
-      `showName` VARCHAR(64) NOT NULL,
-      `description` TEXT,
-      `image` VARCHAR(64),
-      `twitter` VARCHAR(32),
-      `facebook` VARCHAR(128),
-      `website` VARCHAR(128),
-      `active` BOOLEAN NOT NULL);', $wpdb->prefix . $table_prefix . '_settings');
-
-    $query = $wpdb->prepare($sql);
-    $wpdb->query($query);
+  public static function setApiKey($value) {
+    $options = get_option('wpspin_setting_fields');
+    $options['apikey'] = $value;
+    update_option( 'wpspin_setting_fields', $options );
   }
 
+  public static function getSecretKey() {
+    $options = get_option('wpspin_setting_fields');
+    return $options['secretkey'];
+  }
+
+  public static function setSecretKey($value) {
+    $options = get_option('wpspin_setting_fields');
+    $options['secretkey'] = $value;
+    update_option( 'wpspin_setting_fields', $options );
+  }
+
+  public static function getStation() {
+    $options = get_option('wpspin_setting_fields');
+    return $options['station'];
+  }
+
+  public static function setStation($value) {
+    $options = get_option('wpspin_setting_fields');
+    $options['station'] = $value;
+    update_option( 'wpspin_setting_fields', $options );
+  }
+
+  public static function getTimezone()
+  {
+    $options = get_option('wpspin_setting_fields');
+    return $options['timezone'];
+  }
+
+  public static function setTimezone($value)
+  {
+    $options = get_option('wpspin_setting_fields');
+    $options['timezone'] = $value;
+    update_option( 'wpspin_setting_fields', $options );
+  }
 }
 
 ?>

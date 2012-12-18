@@ -1,23 +1,22 @@
 <?php namespace WPSpin;
 
-require_once dirname(__FILE__) . '/../config.php';
-
-date_default_timezone_set($timezone);
+date_default_timezone_set(SettingsModel::getTimezone());
 
 class SpinConnectSingleton {
 
   private static $spinpapi;
+
 
   private function __construct() {
   }
 
   public static function getInstance()
   {
-    global $userid;
-    global $secret;
-    global $station;
-    global $logerrors;
-    global $spinpapiCacheFolder;
+    $userid = SettingsModel::getApiKey();
+    $secret = SettingsModel::getSecretKey();
+    $station = SettingsModel::getStation();
+    $spinpapiCacheFolder = dirname(__FILE__) . '/spinpapi/tmp';
+    $logerrors = true;
 
     if (!isset(self::$spinpapi))
     {
