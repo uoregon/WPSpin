@@ -38,10 +38,14 @@ require_once 'models/settingsmodel.php';
 require_once 'models/spinconnectsingleton.php';
 require_once 'models/songmodel.php';
 require_once 'models/playlistmodel.php';
+require_once 'models/showmodel.php';
+require_once 'models/profilemodel.php';
 
 //Controller Requires
 require_once 'controllers/controllerabstract.php';
 require_once 'controllers/playlistcontroller.php';
+require_once 'controllers/profilecontroller.php';
+require_once 'controllers/showcontroller.php';
 
 //ViewModel Requires
 require_once 'viewmodels/viewmodelinterface.php';
@@ -106,5 +110,8 @@ add_action("admin_menu", 'WPSpin\adminMenu');
 
 //Initialize Controllers
 
-PlaylistController::initActions();
+add_action('init', 'WPSpin\ProfileController::initActions');
+add_action('init', 'WPSpin\ShowController::initActions');
+add_action('init', 'WPSpin\PlaylistController::initActions');
+
 ?>
