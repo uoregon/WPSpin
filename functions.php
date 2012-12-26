@@ -52,6 +52,9 @@ require_once 'viewmodels/viewmodelinterface.php';
 require_once 'viewmodels/playlistwidgetview.php';
 require_once 'viewmodels/settingsview.php';
 
+//Helper Requires
+require_once 'helpers/importhelper.php';
+
 global $wpdb;
 
 add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::initPlaylistWidget');
@@ -86,19 +89,54 @@ function playlistScripts() {
  
 add_action('wp_enqueue_scripts', 'WPSpin\playlistScripts');
 
-// Admin menu registration
-
 /**
- * Register menu item functions with WordPress
+ * Settings View Registration for Options page in Admin area
  */
 
 global $settings;
 
+/**
+ * adminMenu
+ *
+ * Instantiate SettingsView and provide a render callback and sanitization callback
+ *
+ * @access public
+ * @return void
+ */
 function adminMenu()
 {
   global $settings;
-  $settings = new SettingsView('WPSpin\renderSettings');
+  $settings = new SettingsView('WPSpin\renderSettings', 'WPSpin\sanitizeSettingsMenu');
 }
+
+/**
+ * sanitizeSettingsMenu
+ *
+ * Sanitization callback for settings functions
+ * Used to run imports for shows and profiles as well. 
+ *
+ * @param mixed $options
+ * @access public
+ * @return void
+ */
+function sanitizeSettingsMenu($options)
+{
+  if ($options['import'] == 1)
+  {
+    $import = new ImportHelper();
+    $import->import();
+  }
+  return $options;
+}
+
+/**
+ * renderSettings
+ *
+ * Render the settings page template
+ *
+ * @access public
+ * @return void
+ */
 
 function renderSettings()
 {
@@ -106,6 +144,9 @@ function renderSettings()
   $settings->render();
 }
 
+/**
+ * Initialize admin menu
+ */
 add_action("admin_menu", 'WPSpin\adminMenu');
 
 //Initialize Controllers

@@ -2,10 +2,18 @@
 
 class SettingsView implements ViewModelInterface
 {
-  public function __construct($callback) 
+  /**
+   * __construct
+   *
+   * @param mixed $callback
+   * @access public
+   * @return void
+   */
+
+  public function __construct($callback, $sanitizeCallback) 
   {
     add_menu_page("Spinitron Integration Settings", "Spinitron", "manage_options", "wpspin-admin", $callback, "", 25);
-    register_setting( 'wpspin_setting', 'wpspin_setting_fields', '');
+    register_setting( 'wpspin_setting', 'wpspin_setting_fields', $sanitizeCallback);
   }
 
   private function getApiInput()
@@ -114,7 +122,13 @@ class SettingsView implements ViewModelInterface
                 </select>
                 <label class="description" for="wpspin_setting_fields[timezone]"><?php _e( 'Select Timezone for SpinPAPI' ); ?></label>
               </td>
-            </tr>
+         </tr>
+         <tr valign="top"><th scope="row"><?php _e( 'Import Show & DJ Data' ); ?></th>
+           <td>
+             <input id="wpspin_setting_fields[import]" name="wpspin_setting_fields[import]" type="checkbox" value="1" />
+             <label class="description" for="wpspin_setting_fields[import]"></label>
+           </td>
+         </tr>
       </table>
       <p class="submit">
       <input type="submit" class="button-primary" value="<?php _e('Save Options') ?>" />

@@ -23,6 +23,14 @@ class ProfileModel extends ModelAbstract implements ApiAccessInterface
     self::$spinpapi = SpinConnectSingleton::getInstance();
   }
 
+  /**
+   * getAllDJProfiles
+   *
+   * @static
+   * @access public
+   * @return void
+   */
+
   public static function getAllDJProfiles()
   {
     $shows = ShowModel::getAllShows();
