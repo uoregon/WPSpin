@@ -61,6 +61,7 @@ class ImportHelper
       'post_status'    => 'publish', //Set the status of the new post.
       'post_title'     => $show['ShowName'], //The title of your post.
       'post_type'      => 'wpspin_shows', //You may want to insert a regular post, page, link, a menu item or some custom post type
+      'tags_input'     => $this->tagifyShowUsers($show['ShowUsers']) . "{$show['ShowID']}" //For tags.
     );
     $id = wp_insert_post( $post );
     if ($id != 0)
@@ -69,6 +70,23 @@ class ImportHelper
       update_post_meta($id, "_wpspin_show_djs", serialize($show['ShowUsers']));
       update_post_meta($id, "wpspin_show_showurl", $show['ShowUrl']);
     }
+  }
+
+  /**
+   * tagifyShowUsers
+   *
+   * @param array $users
+   * @access private
+   * @return void
+   */
+  private function tagifyShowUsers(array $users)
+  {
+    $output = "";
+    foreach ($users as $user)
+    {
+      $output .= str_replace(" ", ", ", $user['DJName']) . ", ";
+    }
+    return $output;
   }
 
   /**
@@ -89,6 +107,7 @@ class ImportHelper
       'post_status'    => 'publish', //Set the status of the new post.
       'post_title'     => $profile['DJName'], //The title of your post.
       'post_type'      => 'wpspin_profiles', //You may want to insert a regular post, page, link, a menu item or some custom post type
+      'tags_input'     => str_replace(" ", ", ", $profile['ShowName']), //For tags.
     );
     $id = wp_insert_post( $post );
     if ($id != 0)

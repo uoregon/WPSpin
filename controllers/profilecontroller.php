@@ -34,7 +34,7 @@ class ProfileController extends ControllerAbstract
         'public' => true,
         'menu_position' => 25,
         'supports' => array( 'title', 'editor', 'thumbnail' ),
-        'taxonomies' => array( '' ),
+        'taxonomies' => array( 'post_tag' ),
         'menu_icon' => '', 
         'has_archive' => true
       )
@@ -107,6 +107,16 @@ class ProfileController extends ControllerAbstract
   <label for="wpspin-profile-options-facebook"><?php _e( "Facebook Username" ); ?></label>
 <br />
 <input class="widefat" type="text" name="wpspin-profile-options-facebook" id="wpspin-profile-options-facebook" value="<?php echo esc_attr( get_post_meta( $object->ID, 'wpspin_profile_facebook', true ) ); ?>" size="10" />
+</p>
+<p>
+<?php _e( "Show ID" ) ?>
+<br />
+<?php echo esc_attr( get_post_meta( $object->ID, '_wpspin_profile_show_id', true ) ); ?>
+</p>
+<p>
+<?php _e( "DJ ID" ) ?>
+<br />
+<?php echo esc_attr( get_post_meta( $object->ID, '_wpspin_profile_id', true ) ); ?>
 </p>
 
 <?php //End Options Metabox Template

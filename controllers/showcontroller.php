@@ -24,7 +24,7 @@ class ShowController extends ControllerAbstract
         'public' => true,
         'menu_position' => 25,
         'supports' => array( 'title', 'editor', 'thumbnail'),
-        'taxonomies' => array( '' ),
+        'taxonomies' => array( 'post_tag' ),
         'menu_icon' => '', 
         'has_archive' => true
       )
@@ -53,6 +53,18 @@ class ShowController extends ControllerAbstract
       );
   }
 
+  private static function getDJNames($id)
+  {
+    $output = "";
+    $djs = unserialize(get_post_meta($id, '_wpspin_show_djs', true));
+    foreach ($djs as $dj)
+    {
+      $output .= $dj['DJName'] . ", ";
+    }
+    return $output;
+
+  }
+
   public static function optionsMetaBox($object, $box)
   {
 
@@ -68,6 +80,14 @@ class ShowController extends ControllerAbstract
 <td>
 <input class="widefat" type="text" name="wpspin-show-options-showurl" id="wpspin-show-options-showurl" value="<?php echo esc_attr( get_post_meta( $object->ID, 'wpspin_show_showurl', true ) ); ?>" size="30" />
 </td>
+</tr>
+<tr>
+  <td><?php _e( "Show ID" ) ?></td>
+  <td><?php echo esc_attr( get_post_meta( $object->ID, '_wpspin_show_id', true ) ) ?> </td> 
+</tr>
+<tr>
+  <td><?php _e( "DJs" ) ?></td>
+  <td><?php echo esc_html( self::getDJNames($object->ID) ) ?></td>
 </tr>
 </table>
 
