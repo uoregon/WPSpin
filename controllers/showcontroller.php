@@ -24,7 +24,7 @@ class ShowController extends ControllerAbstract
         'public' => true,
         'menu_position' => 25,
         'supports' => array( 'title', 'editor', 'thumbnail'),
-        'taxonomies' => array( 'post_tag' ),
+        'taxonomies' => array( '' ),
         'menu_icon' => '', 
         'has_archive' => true
       )
@@ -35,12 +35,26 @@ class ShowController extends ControllerAbstract
     add_action( 'load-post-new.php', 'WPSpin\ShowController::metaBoxSetup' );
   }
 
+  /**
+   * metaBoxSetup
+   *
+   * @static
+   * @access public
+   * @return void
+   */
   public static function metaBoxSetup()
   {
     add_action( 'add_meta_boxes', 'WPSpin\ShowController::addMetaBox' );
     add_action( 'save_post', 'WPSpin\ShowController::metaBoxSave', 10, 2 );
   }
 
+  /**
+   * addMetaBox
+   *
+   * @static
+   * @access public
+   * @return void
+   */
   public static function addMetaBox()
   {
       add_meta_box(
@@ -53,16 +67,40 @@ class ShowController extends ControllerAbstract
       );
   }
 
+  /**
+   * getDJNames
+   *
+   * @param mixed $id
+   * @static
+   * @access private
+   * @return void
+   */
   private static function getDJNames($id)
   {
     $output = "";
     $djs = unserialize(get_post_meta($id, '_wpspin_show_djs', true));
     foreach ($djs as $dj)
     {
-      $output .= $dj['DJName'] . ", ";
+      $output .= $dj['DJName'] . " ";
     }
     return $output;
 
+  }
+
+  /**
+   * linkify
+   *
+   * @param mixed $search
+   * @static
+   * @access public
+   * @return void
+   */
+  public static function linkify($search)
+  {
+    $search_url = str_replace(" ", "+", $search);
+    $url = admin_url() . "edit.php?s={$search_url}&post_type=wpspin_profiles";
+    $html = "<a href={$url}>{$search}</a>";
+    return $html;
   }
 
   public static function optionsMetaBox($object, $box)
@@ -87,7 +125,7 @@ class ShowController extends ControllerAbstract
 </tr>
 <tr>
   <td><?php _e( "DJs" ) ?></td>
-  <td><?php echo esc_html( self::getDJNames($object->ID) ) ?></td>
+  <td><?php echo self::linkify(esc_html( self::getDJNames($object->ID) )) ?></td>
 </tr>
 </table>
 

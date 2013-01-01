@@ -43,9 +43,10 @@ require_once 'models/profilemodel.php';
 
 //Controller Requires
 require_once 'controllers/controllerabstract.php';
-require_once 'controllers/playlistcontroller.php';
+require_once 'controllers/ajaxcontroller.php';
 require_once 'controllers/profilecontroller.php';
 require_once 'controllers/showcontroller.php';
+require_once 'controllers/shortcodecontroller.php';
 
 //ViewModel Requires
 require_once 'viewmodels/viewmodelinterface.php';
@@ -74,14 +75,14 @@ function playlistScripts() {
 	$scripts_array = array(
 	    "underscore" => 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js',
 	    "backbone" => 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js',
-	    "backbone-mediator" => $url . '/assets/backbone-mediator.js',
-	    "collection" => $url . '/assets/collection.js',
-	    "model" => $url . '/assets/model.js',
-	    "view" => $url . '/assets/view.js',
-	    "song_model" => $url . '/assets/song_model.js',
-	    "playlist_item" => $url . '/assets/playlist_item.js',
-	    "playlist_collection" => $url . '/assets/playlist_collection.js',
-	    "listen_view" => $url . '/assets/listen_view.js',
+	    "backbone-mediator" => $url . '/assets/js/backbone-mediator.js',
+	    "playlist-collection" => $url . '/assets/js/playlist/collection.js',
+	    "playlist-model" => $url . '/assets/js/playlist/model.js',
+	    "playlist-view" => $url . '/assets/js/playlist/view.js',
+	    "playlist-song_model" => $url . '/assets/js/playlist/song_model.js',
+	    "playlist-playlist_item" => $url . '/assets/js/playlist/playlist_item.js',
+	    "playlist-playlist_collection" => $url . '/assets/js/playlist/playlist_collection.js',
+	    "playlist-listen_view" => $url . '/assets/js/playlist/listen_view.js',
 	    );
 	scriptRegistry($scripts_array);
 
@@ -153,6 +154,7 @@ add_action("admin_menu", 'WPSpin\adminMenu');
 
 add_action('init', 'WPSpin\ProfileController::initActions');
 add_action('init', 'WPSpin\ShowController::initActions');
-add_action('init', 'WPSpin\PlaylistController::initActions');
+add_action('init', 'WPSpin\AjaxController::initActions');
+add_action('init', 'WPSpin\ShortcodeController::initActions');
 
 ?>

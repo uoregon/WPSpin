@@ -34,7 +34,7 @@ class ProfileController extends ControllerAbstract
         'public' => true,
         'menu_position' => 25,
         'supports' => array( 'title', 'editor', 'thumbnail' ),
-        'taxonomies' => array( 'post_tag' ),
+        'taxonomies' => array( '' ),
         'menu_icon' => '', 
         'has_archive' => true
       )
@@ -81,6 +81,23 @@ class ProfileController extends ControllerAbstract
   }
 
   /**
+   * linkify
+   *
+   * @param mixed $search
+   * @static
+   * @access public
+   * @return void
+   */
+
+  public static function linkify($search)
+  {
+    $search_url = str_replace(" ", "+", $search);
+    $url = admin_url() . "edit.php?s={$search_url}&post_type=wpspin_shows";
+    $html = "<a href={$url}>{$search}</a>";
+    return $html;
+  }
+
+  /**
    * optionsMetaBox
    *
    * The template for the custom metabox options shown in the new Profile custom post type
@@ -109,15 +126,16 @@ class ProfileController extends ControllerAbstract
 <input class="widefat" type="text" name="wpspin-profile-options-facebook" id="wpspin-profile-options-facebook" value="<?php echo esc_attr( get_post_meta( $object->ID, 'wpspin_profile_facebook', true ) ); ?>" size="10" />
 </p>
 <p>
-<?php _e( "Show ID" ) ?>
-<br />
-<?php echo esc_attr( get_post_meta( $object->ID, '_wpspin_profile_show_id', true ) ); ?>
-</p>
-<p>
 <?php _e( "DJ ID" ) ?>
 <br />
 <?php echo esc_attr( get_post_meta( $object->ID, '_wpspin_profile_id', true ) ); ?>
 </p>
+<p>
+<?php _e( "Show Name (ID)" ) ?>
+<br />
+<?php echo self::linkify(esc_attr( get_post_meta( $object->ID, '_wpspin_profile_show_name', true ) )); ?> (<?php echo esc_attr( get_post_meta( $object->ID, '_wpspin_profile_show_id', true ) ); ?>)
+</p>
+
 
 <?php //End Options Metabox Template
 

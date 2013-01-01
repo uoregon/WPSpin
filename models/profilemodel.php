@@ -54,6 +54,30 @@ class ProfileModel extends ModelAbstract implements ApiAccessInterface
     return $profiles;
   } 
 
+  private static function getDJPostData($userID)
+  {
+    $posts = get_posts(array(
+      'post_type' => 'wpspin_profiles',
+      'meta_key' => '_wpspin_profile_id',
+      'meta_value' => "{$userID}",
+      'compare' => '=',
+    ));
+    return $posts;
+  }
+
+  public static function getDJInfo($userID)
+  {
+    $dj = array();
+    $posts = self::getDJPostData($userID);
+    $post = $posts[0];
+    $dj['name'] = $post->post_title;
+    $dj['bio'] = $post->post_content;
+    $dj['facebook'] = self::getMetaData($post->ID, '_wpspin_profile_facebook');
+    $dj['twitter'] = self::getMetaData($post->ID, '_wpspin_profile_twitter');
+    $dj['image'] = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+    return $dj;
+  }
+
 }
 
 ?>

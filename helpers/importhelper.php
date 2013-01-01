@@ -61,7 +61,7 @@ class ImportHelper
       'post_status'    => 'publish', //Set the status of the new post.
       'post_title'     => $show['ShowName'], //The title of your post.
       'post_type'      => 'wpspin_shows', //You may want to insert a regular post, page, link, a menu item or some custom post type
-      'tags_input'     => $this->tagifyShowUsers($show['ShowUsers']) . "{$show['ShowID']}" //For tags.
+      //'tags_input'     => $this->tagifyShowUsers($show['ShowUsers']) . "{$show['ShowID']}" //For tags.
     );
     $id = wp_insert_post( $post );
     if ($id != 0)
@@ -107,13 +107,14 @@ class ImportHelper
       'post_status'    => 'publish', //Set the status of the new post.
       'post_title'     => $profile['DJName'], //The title of your post.
       'post_type'      => 'wpspin_profiles', //You may want to insert a regular post, page, link, a menu item or some custom post type
-      'tags_input'     => str_replace(" ", ", ", $profile['ShowName']), //For tags.
+      //'tags_input'     => str_replace(" ", ", ", $profile['ShowName']), //For tags.
     );
     $id = wp_insert_post( $post );
     if ($id != 0)
     {
       update_post_meta($id, "_wpspin_profile_show_id", $profile['ShowID']);
       update_post_meta($id, "_wpspin_profile_id", $profile['UserID']);
+      update_post_meta($id, "_wpspin_profile_show_name", $profile['ShowName']);
     }
   }
 

@@ -16,7 +16,6 @@ class SongModel extends ModelAbstract implements ApiAccessInterface
     $query['method'] = "getSong";
     print_r(self::$spinpapi->query($query));
   }
-  
 
 }
 
