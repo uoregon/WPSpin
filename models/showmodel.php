@@ -4,9 +4,25 @@ class ShowModel extends ModelAbstract implements ApiAccessInterface
 {
   private static $spinpapi;
 
+  /**
+   * getApiInstance
+   *
+   * @static
+   * @access public
+   * @return void
+   */
+
   public static function getApiInstance() {
     self::$spinpapi = SpinConnectSingleton::getInstance();
   }
+
+  /**
+   * getAllShows
+   *
+   * @static
+   * @access public
+   * @return void
+   */
 
   public static function getAllShows()
   {
@@ -15,6 +31,14 @@ class ShowModel extends ModelAbstract implements ApiAccessInterface
     $results = self::$spinpapi->query($query);
     return $results['results'];
   } 
+
+  /**
+   * getCurrentShow
+   *
+   * @static
+   * @access public
+   * @return void
+   */
 
   public static function getCurrentShow()
   {
@@ -36,6 +60,14 @@ class ShowModel extends ModelAbstract implements ApiAccessInterface
 
   }
 
+  /**
+   * getShowPosts
+   *
+   * @param mixed $showID
+   * @static
+   * @access private
+   * @return void
+   */
   private static function getShowPosts($showID)
   {
     $posts = get_posts(array(
@@ -47,6 +79,14 @@ class ShowModel extends ModelAbstract implements ApiAccessInterface
     return $posts;
   }
 
+  /**
+   * getShowDJs
+   *
+   * @param \WP_Post $post
+   * @static
+   * @access private
+   * @return void
+   */
   private static function getShowDJs(\WP_Post $post)
   {
     $djs = array();
