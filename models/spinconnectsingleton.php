@@ -15,7 +15,7 @@ class SpinConnectSingleton {
     $userid = SettingsModel::getApiKey();
     $secret = SettingsModel::getSecretKey();
     $station = SettingsModel::getStation();
-    $spinpapiCacheFolder = dirname(__FILE__) . '/spinpapi/tmp';
+    $spinpapiCacheFolder = dirname(__FILE__) . '/../spinpapi/tmp';
     $logerrors = true;
 
     if (!isset(self::$spinpapi))
