@@ -80,9 +80,15 @@ function playlistScripts() {
 	    "playlist-model" => $url . '/assets/js/playlist/model.js',
 	    "playlist-view" => $url . '/assets/js/playlist/view.js',
 	    "playlist-song_model" => $url . '/assets/js/playlist/song_model.js',
-	    "playlist-playlist_item" => $url . '/assets/js/playlist/playlist_item.js',
 	    "playlist-playlist_collection" => $url . '/assets/js/playlist/playlist_collection.js',
 	    "playlist-listen_view" => $url . '/assets/js/playlist/listen_view.js',
+	    "nowplaying-collection" => $url . '/assets/js/nowplaying/collection.js',
+	    "nowplaying-model" => $url . '/assets/js/nowplaying/model.js',
+	    "nowplaying-view" => $url . '/assets/js/nowplaying/view.js',
+	    "nowplaying-nowplaying_model" => $url . '/assets/js/nowplaying/nowplaying_model.js',
+	    "nowplaying-nowplaying_view" => $url . '/assets/js/nowplaying/nowplaying_view.js',
+	    "nowplaying-nowplaying_collection" => $url . '/assets/js/nowplaying/nowplaying_collection.js',
+      "main" => $url . '/assets/js/main.js',
 	    );
 	scriptRegistry($scripts_array);
 

@@ -72,8 +72,8 @@ class ProfileModel extends ModelAbstract implements ApiAccessInterface
     $post = $posts[0];
     $dj['name'] = $post->post_title;
     $dj['bio'] = $post->post_content;
-    $dj['facebook'] = self::getMetaData($post->ID, '_wpspin_profile_facebook');
-    $dj['twitter'] = self::getMetaData($post->ID, '_wpspin_profile_twitter');
+    $dj['facebook'] = self::getMetaData($post->ID, 'wpspin_profile_facebook');
+    $dj['twitter'] = self::getMetaData($post->ID, 'wpspin_profile_twitter');
     $dj['image'] = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
     return $dj;
   }

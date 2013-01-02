@@ -24,6 +24,7 @@ class ShowModel extends ModelAbstract implements ApiAccessInterface
     $results = self::$spinpapi->query($query);
     $showinfo = $results['results'];
     $showID = $showinfo['ShowID'];
+    $showID = 2888;
     $posts = self::getShowPosts($showID);
     if (count($posts) > 0)
     {

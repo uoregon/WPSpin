@@ -17,9 +17,16 @@ class PlaylistWidgetView extends \WP_Widget {
     extract($args);
     $title = apply_filters( 'widget_title', 'Now Playing' );
     echo $before_widget;
-    if ( ! empty( $title ) )
+    if ( ! empty( $title ) ) {
       echo $before_title . $title . $after_title;
-    echo '<section class="wps-playlist-items"></section>';
+      echo '<section class="wps-playlist-items"></section>';
+?>
+<script type="text/template" class="wps-playlist-template">
+        <p class="track"><%= track %></p>
+        <p class="artist"><%= artist %></p>
+</script>
+<?php
+    }
     echo $after_widget;
   }
 

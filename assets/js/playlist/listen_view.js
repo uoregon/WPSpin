@@ -1,11 +1,12 @@
 var Playlist = Playlist || {};
 
-Playlist.Listen = (function ($, View, template, playlistTemplate) {
+Playlist.Listen = (function ($, View) {
   return View.extend({
     el: "body",
     playlist_el: ".wps-playlist-items",
-    playlist_template: _.template(playlistTemplate),
-
+    playlist_template: function () {
+      return _.template($(".wps-playlist-template").html());
+    },
     initialize: function () {
       _.bindAll(this, "render");
       Backbone.Mediator.sub("listen:load", this.render, this);
@@ -25,7 +26,8 @@ Playlist.Listen = (function ($, View, template, playlistTemplate) {
       this.collectionPromise.pipe(function (collection) {
         collection.each(function (item) {
           item = _self.formatItem(item.toJSON());
-          $(_self.playlist_el).append(_self.playlist_template(item)).hide().fadeIn();
+          var template = _self.playlist_template();
+          $(_self.playlist_el).append(template(item)).hide().fadeIn();
         });
       });
     },
@@ -46,9 +48,9 @@ Playlist.Listen = (function ($, View, template, playlistTemplate) {
     }
 
   });
-})(jQuery, Playlist.View, Playlist.Template, Playlist.PlaylistItem);
+})(jQuery, Playlist.View);
 
-jQuery(document).ready(function () {
-  new Playlist.Listen();
-  Backbone.Mediator.publish("listen:load");
-});
+
+
+
+
