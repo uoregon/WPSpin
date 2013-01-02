@@ -20,7 +20,7 @@ class ShowModel extends ModelAbstract implements ApiAccessInterface
   {
     $show = array();
     self::getApiInstance();
-    $query['method'] = "getPlaylistInfo";
+    $query['method'] = "getShowInfo";
     $results = self::$spinpapi->query($query);
     $showinfo = $results['results'];
     $showID = $showinfo['ShowID'];
