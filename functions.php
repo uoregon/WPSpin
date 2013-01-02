@@ -31,8 +31,6 @@
 require_once 'spinpapi/SpinPapiClient.inc.php';
 
 //Model Requires
-require_once 'models/apiaccessinterface.php';
-require_once 'models/dbaccessinterface.php';
 require_once 'models/modelabstract.php';
 require_once 'models/settingsmodel.php';
 require_once 'models/spinconnectsingleton.php';

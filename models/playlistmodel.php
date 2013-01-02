@@ -1,6 +1,6 @@
 <?php namespace WPSpin;
 
-class PlaylistModel extends ModelAbstract implements ApiAccessInterface
+class PlaylistModel extends ModelAbstract
 {
   private static $spinpapi;
 

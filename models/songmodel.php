@@ -1,6 +1,6 @@
 <?php namespace WPSpin;
 
-class SongModel extends ModelAbstract implements ApiAccessInterface
+class SongModel extends ModelAbstract 
 {
   private static $spinpapi; //SpinPapi Instance
 

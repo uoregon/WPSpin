@@ -5,7 +5,7 @@
  * @global type $wpdb
  */
 
-class ProfileModel extends ModelAbstract implements ApiAccessInterface
+class ProfileModel extends ModelAbstract
 {
 //      `showID` int PRIMARY KEY,
 //      `showName` VARCHAR(64) NOT NULL,
