@@ -21,6 +21,12 @@ class PlaylistWidgetView extends \WP_Widget {
       echo $before_title . $title . $after_title;
       echo '<section class="wps-playlist-items"></section>';
 ?>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+  new Playlist.Listen();
+  Backbone.Mediator.publish("listen:load");
+});
+</script>
 <script type="text/template" class="wps-playlist-template">
         <p class="track"><%= track %></p>
         <p class="artist"><%= artist %></p>

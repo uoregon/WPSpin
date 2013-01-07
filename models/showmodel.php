@@ -44,10 +44,11 @@ class ShowModel extends ModelAbstract
   {
     $show = array();
     self::getApiInstance();
-    $query['method'] = "getShowInfo";
+    $query['method'] = "getRegularShowsInfo";
+    $query['When'] = 'now';
     $results = self::$spinpapi->query($query);
     $showinfo = $results['results'];
-    $showID = $showinfo['ShowID'];
+    $showID = $showinfo[0]['ShowID'];
     $posts = self::getShowPosts($showID);
     if (count($posts) > 0)
     {

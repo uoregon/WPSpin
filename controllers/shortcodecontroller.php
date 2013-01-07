@@ -13,6 +13,13 @@ class ShortcodeController extends ControllerAbstract
 ?>
 
 <span class="wps-now-playing"></span>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+  new NowPlaying.Display();
+  Backbone.Mediator.publish("nowplaying:load");
+});
+</script>
+
 <script type="text/template" class="wps-nowplaying-template">
 <h3 class="wps-nowplaying-title"><%= title %></h3>
 <p><span class="wps-nowplaying-desc"><%= description %></span></p>
