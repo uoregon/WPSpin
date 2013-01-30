@@ -55,6 +55,7 @@ class ShowModel extends ModelAbstract
       $post = $posts[0];
       $show['description'] = $post->post_content;
       $show['title'] = $post->post_title;
+      $show['image'] = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
       $show['DJProfiles'] = self::getShowDJs($post);
     }
     return $show;

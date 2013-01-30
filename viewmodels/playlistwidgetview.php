@@ -30,6 +30,7 @@ jQuery(document).ready(function () {
 <script type="text/template" class="wps-playlist-template">
         <p class="track"><%= track %></p>
         <p class="artist"><%= artist %></p>
+        <p class="timestamp"><%= timestamp %></p>
 </script>
 <?php
     }
