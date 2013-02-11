@@ -19,11 +19,11 @@ class ProfileController extends ControllerAbstract
         'labels' => array(
           'name' => 'DJ Profiles',
           'singular_name' => 'DJ Profile',
-          'add_new' => 'Add New Profile',
-          'add_new_item' => 'Add New Profile',
+          'add_new' => '',
+          'add_new_item' => '',
           'edit' => 'Edit',
           'edit_item' => 'Edit Profile',
-          'new_item' => 'New Profile',
+          'new_item' => '',
           'view' => 'View',
           'view_item' => 'View Profile',
           'search_items' => 'Search Profiles',
@@ -42,6 +42,11 @@ class ProfileController extends ControllerAbstract
     /* Fire our meta box setup function on the post editor screen. */
     add_action( 'load-post.php', 'WPSpin\ProfileController::metaBoxSetup' );
     add_action( 'load-post-new.php', 'WPSpin\ProfileController::metaBoxSetup' );
+    add_action( 'admin_menu', 'WPSpin\ProfileController::adjustTheWPMenu', 999 );
+  }
+
+  public static function adjustTheWPMenu() {
+      $page = remove_submenu_page( 'edit.php?post_type=wpspin_profiles', 'post-new.php?post_type=wpspin_profiles' );
   }
 
   /**

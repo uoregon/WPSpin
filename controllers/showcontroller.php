@@ -9,11 +9,11 @@ class ShowController extends ControllerAbstract
         'labels' => array(
           'name' => 'Radio Shows',
           'singular_name' => 'Radio Show',
-          'add_new' => 'Add New Show',
-          'add_new_item' => 'Add New Show',
+          'add_new' => '',
+          'add_new_item' => '',
           'edit' => 'Edit',
           'edit_item' => 'Edit Show',
-          'new_item' => 'New Show',
+          'new_item' => '',
           'view' => 'View',
           'view_item' => 'View Show',
           'search_items' => 'Search Shows',
@@ -33,7 +33,13 @@ class ShowController extends ControllerAbstract
     /* Fire our meta box setup function on the post editor screen. */
     add_action( 'load-post.php', 'WPSpin\ShowController::metaBoxSetup' );
     add_action( 'load-post-new.php', 'WPSpin\ShowController::metaBoxSetup' );
+    add_action( 'admin_menu', 'WPSpin\ShowController::adjustTheWPMenu', 999 );
   }
+
+  public static function adjustTheWPMenu() {
+      $page = remove_submenu_page( 'edit.php?post_type=wpspin_shows', 'post-new.php?post_type=wpspin_shows' );
+  }
+
 
   /**
    * metaBoxSetup
