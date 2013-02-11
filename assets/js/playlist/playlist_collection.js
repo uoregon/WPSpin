@@ -47,6 +47,8 @@ Playlist.PlaylistCollection = (function ($, Collection, SongModel) {
       var timestamp = _self.first().get("Date") + " " + _self.first().get("Timestamp");
       _self.reset(data);
       var new_timestamp = _self.first().get("Date") + " " + _self.first().get("Timestamp");
+      timestamp = timestamp.replace(" ", "T");
+      new_timestamp = new_timestamp.replace(" ", "T");
       if(Date.parse(timestamp) < Date.parse(new_timestamp)) {
         Backbone.Mediator.pub("listen:playlist:update");
         return;
