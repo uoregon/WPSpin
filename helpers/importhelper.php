@@ -31,11 +31,19 @@ class ImportHelper
   public function import()
   {
     $shows = ShowModel::getAllShows();
+    if (count($shows) == 0) {
+      throw new \Exception("Failed to retrieve all the shows from Spinitron. Check your settings.");
+    }
     foreach ($shows as $show)
     {
       $this->createShow($show);
     }
     $profiles = ProfileModel::getAllDJProfiles();
+
+    if (count($profiles) == 0) {
+      throw new \Exception("Failed to retrieve all the DJ profiles from Spinitron. Check your settings.");
+    }
+
     foreach ($profiles as $profile)
     {
       $this->createProfile($profile);

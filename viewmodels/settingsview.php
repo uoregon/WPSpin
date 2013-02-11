@@ -90,6 +90,10 @@ class SettingsView implements ViewModelInterface
    <?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
         <div class="updated fade"><p><strong><?php _e( 'Options saved' ); ?></strong></p></div>
    <?php endif; ?>
+   <?php if ( isset($_SESSION['wpspin-exception']) ) : ?>
+         <div class="error fade"><p><strong><?php echo $_SESSION['wpspin-exception'] ?></strong></p></div>
+         <?php unset($_SESSION['wpspin-exception']) ?>
+   <?php endif; ?>
    <h2>WP Spin Settings</h2>
    <form method="post" action="options.php">
    <?php settings_fields('wpspin_setting') ?>

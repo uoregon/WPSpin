@@ -129,7 +129,11 @@ function sanitizeSettingsMenu($options)
   if ($options['import'] == 1)
   {
     $import = new ImportHelper();
-    $import->import();
+    try {
+      $import->import();
+    } catch (\Exception $e) {
+      $_SESSION['wpspin-exception'] = $e->getMessage();
+    }
   }
   return $options;
 }
@@ -160,5 +164,20 @@ add_action('init', 'WPSpin\ProfileController::initActions');
 add_action('init', 'WPSpin\ShowController::initActions');
 add_action('init', 'WPSpin\AjaxController::initActions');
 add_action('init', 'WPSpin\ShortcodeController::initActions');
+
+//Start Sessions for Error Handling Messaging
+add_action('init', 'WPSpin\startSession', 1);
+add_action('wp_logout', 'WPSpin\endSession');
+add_action('wp_login', 'WPSpin\startSession');
+
+function startSession() {
+  if(!session_id()) {
+    session_start();
+  }
+}
+
+function endSession() {
+  session_destroy ();
+}
 
 ?>
