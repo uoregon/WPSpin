@@ -13,7 +13,7 @@ A WordPress plugin providing integration with Spinitron's SpinPAPI API service.
 Features
 ========
 
-## "Now On Air" Content
+## "Now on Air" Content
 
 To insert a block of content with information about the show currently on air, simply insert the shortcode
 [wpspin-now-playing] into the page where you'd like the block to appear. 
@@ -24,11 +24,29 @@ WPSpin provides a widget that displays the ten most recent items on the current 
 
 ## DJ Profiles
 
-DJ Information is automatically imported from Spinitron when shows are imported. DJ Profiles are implemented
-as custom post types and can be edited to add photos and descriptions. A listing of all DJs can be accessed
-at <your website url>/wpspin\_profiles (e.g. www.mysite.com/wordpress/wpspin\_profiles).
+DJ Profiles are implemented as custom post types and can be edited to add photos and descriptions. A listing of all 
+DJs can be accessed at <your website url>/wpspin\_profiles (e.g. www.mysite.com/wordpress/wpspin\_profiles).
 
 Theming and Styles
 ==================
 
-COMING SOON: Add class information for CSS types to fit this plugin into their site designs.
+Both the playlist widget and the "Now on Air" content can be styled to fit with your site's wordpress theme.
+HTML element types and their respective classes are listed below. 
+
+## "Now on Air"
+span *wps-now-playing*
+- img *wps-nowplaying-show-image*
+- h3 *wps-nowplaying-title*
+- span *wps-nowplaying-desc*
+- span *wps-nowplaying-profile*
+- img *wps-nowplaying-profile-image*
+- span *wps-nowplaying-profile-name*
+- span *wps-nowplaying-profile-bio*
+- span *wps-nowplaying-profile-facebook*
+- span *wps-nowplaying-profile-twitter*
+
+## Playlist
+*wps-playlist-template*
+- p *track*
+- p *artist*
+- p *timestamp*
