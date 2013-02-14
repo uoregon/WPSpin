@@ -15,7 +15,7 @@ class PlaylistWidgetView extends \WP_Widget {
 
   public function widget($args, $instance) {
     extract($args);
-    $title = apply_filters( 'widget_title', 'Playlist' );
+    $title = apply_filters( 'widget_title', 'Recently Played' );
     echo $before_widget;
     if ( ! empty( $title ) ) {
       echo $before_title . $title . $after_title;
