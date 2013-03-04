@@ -6,6 +6,7 @@ A WordPress plugin providing integration with Spinitron's SpinPAPI API service.
 ## Installing
 
 - Clone or copy project folder into wp-content/plugins directory
+- Give write permissions to the wp-content/plugins/WPSpin/spinpapi/tmp folder
 - Activate plugin from WordPress plugins screen
 - Click 'Spinitron' in WordPress menu
 - Fill in user id, secret key, and station callsign
@@ -34,11 +35,11 @@ Both the playlist widget and the "Now on Air" content can be styled to fit with 
 HTML element types and their respective classes are listed below. 
 
 ## "Now on Air"
-span *wps-now-playing*
+div *wps-now-playing*
 - img *wps-nowplaying-show-image*
 - h3 *wps-nowplaying-title*
 - span *wps-nowplaying-desc*
-- span *wps-nowplaying-profile*
+- div *wps-nowplaying-profile*
 - img *wps-nowplaying-profile-image*
 - span *wps-nowplaying-profile-name*
 - span *wps-nowplaying-profile-bio*
