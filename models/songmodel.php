@@ -14,7 +14,6 @@ class SongModel extends ModelAbstract
   public static function getNowPlaying() {
     self::getApiInstance();
     $query['method'] = "getSong";
-    print_r(self::$spinpapi->query($query));
   }
 
 }

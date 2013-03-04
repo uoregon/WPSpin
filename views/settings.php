@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Settings Page Template
  */
