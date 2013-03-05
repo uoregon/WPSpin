@@ -1,0 +1,3 @@
+[submodule "spinpapi"]
+	path = spinpapi
+	url = https://bitbucket.org/Spinitron/spinpapi-php-client.git
