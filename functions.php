@@ -3,10 +3,10 @@
    Plugin Name: WPSpin
    Plugin URI: http://github.com/emumark/WPSpin
    Description: Provides Wordpress Spinitron integraton through to SPINPAPI API
-   Version: 0.5
+   Version: 1.0
    Author: Michael A Tomcal - University of Oregon - EMU Marketing
    Author URI: http://marketing.uoregon.edu
-   License: MIT
+   License: GPLv2
    Copyright 2012  University of Oregon (email : emumark@uoregon.edu)
 
    Permission is hereby granted, free of charge, to any person obtaining a copy 
