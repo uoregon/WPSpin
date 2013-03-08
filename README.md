@@ -34,6 +34,8 @@ Theming and Styles
 Both the playlist widget and the "Now on Air" content can be styled to fit with your site's wordpress theme.
 HTML element types and their respective classes are listed below. 
 
+Should you wish to edit the view templates, they can be found in /views/. 
+
 ## "Now on Air"
 div *wps-now-playing*
 - img *wps-nowplaying-show-image*
