@@ -11,7 +11,8 @@ jQuery(document).ready(function () {
 });
 </script>
 <script type="text/template" class="wps-playlist-template">
-        <p class="track"><%= track %></p>
+	<div class="wps-playlist-item">
+        <p class="track"><%= track %> <span class="timestamp"><%= timestamp %></span></p>
         <p class="artist"><%= artist %></p>
-        <p class="timestamp"><%= timestamp %></p>
+    </div>
 </script>
