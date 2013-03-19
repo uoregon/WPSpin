@@ -13,10 +13,13 @@ have this and need access, contact [Spinitron](http://spinitron.com).
 ## Installing
 
 - Clone or copy project folder into wp-content/plugins directory
-- Give write permissions to the wp-content/plugins/WPSpin/spinpapi/tmp folder
+- Install the SpinPapi PHP client by running the commands *git submodule init* and *git submodule update*
+in the WPSpin root directory
+- Ensure that the WPSpin/spinpapi/tmp folder is writable by the web server user
 - Activate plugin from WordPress plugins screen
 - Click 'Spinitron' in WordPress menu
-- Fill in user id, secret key, and station callsign
+- Fill in user id, secret key, and station callsign. Be sure to check 'Import Show & DJ Data' to load your station's 
+information from Spinitron.
 
 Features
 ========
