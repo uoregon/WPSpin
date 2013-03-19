@@ -3,6 +3,13 @@ WPSpin
 
 A WordPress plugin providing integration with Spinitron's SpinPAPI API service.
 
+## Requirements
+
+- WordPress version 3.5 or higher (may work on lower versions, not tested).
+- PHP version 5.3 or higher.
+- Spinitron API access. You will need your API Key and shared secret when installing this plugin. If you do not 
+have this and need access, contact [Spinitron](http://spinitron.com).
+
 ## Installing
 
 - Clone or copy project folder into wp-content/plugins directory
