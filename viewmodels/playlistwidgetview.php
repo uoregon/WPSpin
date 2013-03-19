@@ -24,11 +24,11 @@ class PlaylistWidgetView extends \WP_Widget {
     echo $after_widget;
   }
 
-  public function update($instance) {
+  public function update($new_instance, $old_instance) {
 
   }
 
-  public function form($new_instance, $old_instance) {
+  public function form($instance) {
 
   }
 
