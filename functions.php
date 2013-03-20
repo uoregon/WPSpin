@@ -69,24 +69,23 @@ function scriptRegistry($name_location_array) {
 
 
 function playlistScripts() {
-	$url = plugins_url('WPSpin');
 	$scripts_array = array(
 	    "underscore" => 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js',
 	    "backbone" => 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js',
-	    "backbone-mediator" => $url . '/assets/js/backbone-mediator.js',
-	    "playlist-collection" => $url . '/assets/js/playlist/collection.js',
-	    "playlist-model" => $url . '/assets/js/playlist/model.js',
-	    "playlist-view" => $url . '/assets/js/playlist/view.js',
-	    "playlist-song_model" => $url . '/assets/js/playlist/song_model.js',
-	    "playlist-playlist_collection" => $url . '/assets/js/playlist/playlist_collection.js',
-	    "playlist-listen_view" => $url . '/assets/js/playlist/listen_view.js',
-	    "nowplaying-collection" => $url . '/assets/js/nowplaying/collection.js',
-	    "nowplaying-model" => $url . '/assets/js/nowplaying/model.js',
-	    "nowplaying-view" => $url . '/assets/js/nowplaying/view.js',
-	    "nowplaying-nowplaying_model" => $url . '/assets/js/nowplaying/nowplaying_model.js',
-	    "nowplaying-nowplaying_view" => $url . '/assets/js/nowplaying/nowplaying_view.js',
-	    "nowplaying-nowplaying_collection" => $url . '/assets/js/nowplaying/nowplaying_collection.js',
-      "main" => $url . '/assets/js/main.js',
+	    "backbone-mediator" => plugins_url('/assets/js/backbone-mediator.js', __FILE__),
+	    "playlist-collection" => plugins_url('/assets/js/playlist/collection.js', __FILE__),
+	    "playlist-model" => plugins_url('/assets/js/playlist/model.js', __FILE__),
+	    "playlist-view" => plugins_url('/assets/js/playlist/view.js', __FILE__),
+	    "playlist-song_model" => plugins_url('/assets/js/playlist/song_model.js', __FILE__),
+	    "playlist-playlist_collection" => plugins_url('/assets/js/playlist/playlist_collection.js', __FILE__),
+	    "playlist-listen_view" => plugins_url('/assets/js/playlist/listen_view.js', __FILE__),
+	    "nowplaying-collection" => plugins_url('/assets/js/nowplaying/collection.js', __FILE__),
+	    "nowplaying-model" => plugins_url('/assets/js/nowplaying/model.js', __FILE__),
+	    "nowplaying-view" => plugins_url('/assets/js/nowplaying/view.js', __FILE__),
+	    "nowplaying-nowplaying_model" => plugins_url('/assets/js/nowplaying/nowplaying_model.js', __FILE__),
+	    "nowplaying-nowplaying_view" => plugins_url('/assets/js/nowplaying/nowplaying_view.js', __FILE__),
+	    "nowplaying-nowplaying_collection" => plugins_url('/assets/js/nowplaying/nowplaying_collection.js', __FILE__),
+      "main" => plugins_url('/assets/js/main.js', __FILE__),
 	    );
 	scriptRegistry($scripts_array);
 
