@@ -26,8 +26,8 @@ jQuery(document).ready(function () {
   <span class="wps-nowplaying-profile-bio"><%= profile.bio %></span>
   <% if (profile.facebook != false || profile.twitter != false) { %>
     <h4>Social</h4>
-    <p><span class="wps-nowplaying-profile-facebook"><%= profile.facebook %></span></p>
-    <p><span class="wps-nowplaying-profile-twitter"><%= profile.twitter %></span></p>
+    <a href="http://www.facebook.com/<%= profile.facebook %>" class="wps-nowplaying-profile-facebook" target="_blank">Facebook</a>
+    <a href="https://twitter.com/<%= profile.twitter %>" class="wps-nowplaying-profile-twitter" target="_blank">Twitter</a>
   <% } %>
 <% }); %>
 </div>
