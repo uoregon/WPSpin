@@ -3,7 +3,7 @@
  * Profile Template
  */
 ?>
-<?php wp_nonce_field( basename( __FILE__ ), 'wpspin_profile_options_nonce' ); ?>
+<?php wp_nonce_field( basename(__FILE__), 'wpspin_profile_options_nonce' ); ?>
 
 <p>
   <label for="wpspin-profile-options-twitter"><?php _e( "Twitter Username" ); ?></label>

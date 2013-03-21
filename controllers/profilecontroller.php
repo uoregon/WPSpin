@@ -2,6 +2,8 @@
 
 class ProfileController extends ControllerAbstract
 {
+  public static $view;
+
   /**
    * initActions
    *
@@ -43,6 +45,10 @@ class ProfileController extends ControllerAbstract
     add_action( 'load-post.php', 'WPSpin\ProfileController::metaBoxSetup' );
     add_action( 'load-post-new.php', 'WPSpin\ProfileController::metaBoxSetup' );
     add_action( 'admin_menu', 'WPSpin\ProfileController::adjustTheWPMenu', 999 );
+
+    // Specify the view path and filename
+    
+    self::$view = __DIR__ . "/../views/profilemetabox.php";
   }
 
   public static function adjustTheWPMenu() {
@@ -115,7 +121,7 @@ class ProfileController extends ControllerAbstract
    */
   public static function optionsMetaBox($object, $box)
   {
-    include __DIR__ . "/../views/profilemetabox.php";
+    include self::$view;
   }
 
   /**
@@ -132,7 +138,8 @@ class ProfileController extends ControllerAbstract
   public static function metaBoxSave($post_id, $post)
   {
     //Verify the nonce
-    if( !isset($_POST['wpspin_profile_options_nonce']) || !wp_verify_nonce($_POST['wpspin_profile_options_nonce'], basename(__FILE__)))
+
+    if( !isset($_POST['wpspin_profile_options_nonce']) || !wp_verify_nonce($_POST['wpspin_profile_options_nonce'], basename(self::$view)))
     {
       return $post_id;
     }
@@ -159,6 +166,7 @@ class ProfileController extends ControllerAbstract
 
       if ( $new_meta_values[$field] && '' == $meta_value )
       {
+        delete_post_meta( $post_id, $meta_key, $meta_value );
         add_post_meta( $post_id, $meta_key, $new_meta_values[$field], true );
       }
       elseif ( $new_meta_values[$field] && $new_meta_values[$field] != $meta_value )

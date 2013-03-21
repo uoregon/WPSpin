@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php wp_nonce_field( basename( __FILE__ ), 'wpspin_show_options_nonce' ); ?>
+<?php wp_nonce_field( basename(__FILE__), 'wpspin_show_options_nonce' ); ?>
 
 <table>
 <tr>

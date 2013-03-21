@@ -2,6 +2,9 @@
 
 class ShowController extends ControllerAbstract
 {
+
+  public static $view;
+
   public static function initActions()
   {
     register_post_type( 'wpspin_shows',
@@ -34,6 +37,8 @@ class ShowController extends ControllerAbstract
     add_action( 'load-post.php', 'WPSpin\ShowController::metaBoxSetup' );
     add_action( 'load-post-new.php', 'WPSpin\ShowController::metaBoxSetup' );
     add_action( 'admin_menu', 'WPSpin\ShowController::adjustTheWPMenu', 999 );
+
+    self::$view = __DIR__ . "/../views/showmetabox.php";
   }
 
   public static function adjustTheWPMenu() {
@@ -111,13 +116,14 @@ class ShowController extends ControllerAbstract
 
   public static function optionsMetaBox($object, $box)
   {
-    include __DIR__ . "/../views/showmetabox.php";
+    include self::$view;
   }
 
   public static function metaBoxSave($post_id, $post)
   {
     //Verify the nonce
-    if( !isset($_POST['wpspin_show_options_nonce']) || !wp_verify_nonce($_POST['wpspin_show_options_nonce'], basename(__FILE__)))
+
+    if( !isset($_POST['wpspin_show_options_nonce']) || !wp_verify_nonce($_POST['wpspin_show_options_nonce'], basename(self::$view)))
     {
       return $post_id;
     }
@@ -142,6 +148,7 @@ class ShowController extends ControllerAbstract
 
       if ( $new_meta_values[$field] && '' == $meta_value )
       {
+        delete_post_meta( $post_id, $meta_key, $meta_value );
         add_post_meta( $post_id, $meta_key, $new_meta_values[$field], true );
       }
       elseif ( $new_meta_values[$field] && $new_meta_values[$field] != $meta_value )
