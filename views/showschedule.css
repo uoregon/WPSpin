@@ -1,0 +1,92 @@
+	/*============================================================
+	the shedule
+	take care here. the widths and heights in % should be left
+	alone. the grid is layed out by percents of the size of the
+	envlosling #bigscheddiv, height of which you can override.
+	#middle's class is "wide" for the program schedule to make
+	it as wide as the browser viewport can take
+	============================================================ */
+#catselector a {		/* links in the show category selector above the schedule */
+	}
+#catselector a.hilite {
+	/* javascript appends 'hilite' to a link's classname when the user clicks it */
+	color: black;
+	background: #fc8;
+	}
+#bigscheddiv {			/* div enclosing the schedule */
+	position: relative;
+	width: 100%;
+	min-width: 40em;	/* min-width doesn't work in MS-IE6. sorry */
+	height: 80em;
+	/* the block that defines the size of the schedule therefore also the elements within */
+}
+div.schedshow, 
+div.schedbg0, 
+div.schedbg1, 
+div.schedday {			/* boxes in the schedule are absolutely positioned */
+	/* block elements within the schedule */
+	position: absolute;
+	border: none;
+	}
+div.schedshow {	
+	/*  box for one show in the schedule. width, top and left property values 
+		are set by the script as it generates the schedule */
+	background: #ddd;
+	border: 1px solid #600;
+	text-align: center;
+	line-height: 1.2;
+	overflow: hidden;
+	}
+div.schedshow.hilite {
+	/* 'hilite' is dynamically appended to applicable blocks' classname  
+		when the user selects a show category */
+	background: #fc8;
+	}
+div.schedshow p {		/* para within a show box */
+	font-size: 0.85em;
+	padding: 0.2em 0.1em;
+	margin: 0;
+	}
+div.schedshow a {		/* the first link within a show box */
+    text-decoration: none;
+	color: #700;
+	font-weight: normal;
+    outline: none;
+	}
+div.schedshow span a {	/* the other link within a show box */
+	background: transparent;
+	color: black;
+	}
+div.schedshow a:hover { /* links in the show boxes */
+	background: #eeb;
+	}
+div.schedday {			/* days of the week at the top of the grid */ 
+	width: 13%;
+	padding-top: 0.4em;
+	text-align: center;
+	}
+div.schedbg0,
+div.schedbg1 {			/* short wide background boxes for hours of the day */
+	/* allows different styles for alternating rows. not currently used by
+	   default but it's available. property 'top' is set by the script */ 
+	background: white;
+	border: 1px solid #aaa;
+	left: 3%;
+	width: 94%;
+	}
+div.schedbg0 p, 
+div.schedbg1 p {		/* hour of the day labels  */
+	position: absolute;
+	top: -0.7em;
+	font-size: 0.85em;
+	background: transparent;
+	padding: 0;
+	}
+p.hourl {				/* hour labels on the left */
+	text-align: right;
+	right: 100.5%;
+	}
+p.hourr {				/* hour labels on the right */
+	text-align: left;
+	left: 100.5%;
+}
