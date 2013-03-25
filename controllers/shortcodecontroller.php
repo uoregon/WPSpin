@@ -16,7 +16,8 @@ class ShortcodeController extends ControllerAbstract
 
   public static function showSchedule()
   {
-  	$data = file_get_contents('http://spinitron.com/radio/playlist.php?station=kwva&show=schedule&ptype=s');
+  	$station = SettingsModel::getStation();
+  	$data = file_get_contents('http://spinitron.com/radio/playlist.php?station=' . $station . '&show=schedule&ptype=s');
 	$stylesheet = plugin_dir_url( __FILE__ ) . '../views/showschedule.css';
 
 	// link stylesheet from view and render processed data
