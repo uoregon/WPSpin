@@ -29,14 +29,26 @@ Features
 To insert a block of content with information about the show currently on air, simply insert the shortcode
 [wpspin-now-playing] into the page where you'd like the block to appear. 
 
+## Program Schedule
+
+To render a weekly program schedule, use the shortcode [wpspin-show-schedule]. If you'd like to customize the appearance
+from the default Spinitron style, the stylesheet that controls the layout for this view is located in views/showschedule.css.
+
 ## Playlist Widget
 
 WPSpin provides a widget that displays the ten most recent items on the current playlist in reverse-chronological order.
 
 ## DJ Profiles
 
-DJ Profiles are implemented as custom post types and can be edited to add photos and descriptions. A listing of all 
-DJs can be accessed at <your website url>/wpspin\_profiles (e.g. www.mysite.com/wordpress/wpspin\_profiles).
+DJ Profiles are implemented as custom post types and can be edited to add photos and descriptions. If you are using
+'post name' style permalinks, a listing of all DJs can be accessed at <your website url>/wpspin\_profiles 
+(e.g. www.mysite.com/wordpress/wpspin_profiles).
+
+## Show Listings
+
+Show listings are implemented as custom post types and can be edited to add photos and descriptions. If you are using
+'post name' style permalinks,A listing of all shows can be accessed at <your website url>/wpspin\_shows 
+(e.g. www.mysite.com/wordpress/wpspin_shows).
 
 Theming and Styles
 ==================
