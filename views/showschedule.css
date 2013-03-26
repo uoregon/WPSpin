@@ -15,8 +15,7 @@
 	}
 #bigscheddiv {			/* div enclosing the schedule */
 	position: relative;
-	width: 100%;
-	min-width: 40em;	/* min-width doesn't work in MS-IE6. sorry */
+	width: 100%;	
 	height: 80em;
 	/* the block that defines the size of the schedule therefore also the elements within */
 }
