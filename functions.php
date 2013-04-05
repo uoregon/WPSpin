@@ -125,11 +125,16 @@ function adminMenu()
  */
 function sanitizeSettingsMenu($options)
 {
-  if ($options['import'] == 1)
+  if ($options['import'] == 1 || $options['update'] == 1)
   {
     $import = new ImportHelper();
     try {
-      $import->import();
+      if ($options['update'] == 1)
+      {
+        $import->update();
+      } else {
+        $import->import();
+      }
     } catch (\Exception $e) {
       $_SESSION['wpspin-exception'] = $e->getMessage();
     }

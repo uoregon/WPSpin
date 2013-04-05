@@ -45,6 +45,12 @@
                 <label class="description" for="wpspin_setting_fields[timezone]"><?php _e( 'Select Timezone for SpinPAPI' ); ?></label>
               </td>
          </tr>
+         <tr valign="top"><th scope="row"><?php _e( 'Update Existing Show Descriptions' ); ?></th>
+           <td>
+             <input id="wpspin_setting_fields[update]" name="wpspin_setting_fields[update]" type="checkbox" value="1" />
+             <label class="description" for="wpspin_setting_fields[update]"></label>
+           </td>
+         </tr>
          <tr valign="top"><th scope="row"><?php _e( 'Import Show & DJ Data' ); ?></th>
            <td>
              <input id="wpspin_setting_fields[import]" name="wpspin_setting_fields[import]" type="checkbox" value="1" />

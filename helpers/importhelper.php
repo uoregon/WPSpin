@@ -22,6 +22,23 @@ class ImportHelper
   }
 
   /**
+   * Run updates
+   * @param  boolean $setting [description]
+   * @return [type]           [description]
+   */
+  public function update()
+  {
+    $shows = ShowModel::getAllShows();
+    if (count($shows) == 0) {
+      throw new \Exception("Failed to retrieve all the shows from Spinitron. Check your settings.");
+    }
+    foreach ($shows as $show)
+    {
+      $this->updateShow($show);
+    }
+  }
+
+  /**
    * import
    *
    * @access public
@@ -64,6 +81,7 @@ class ImportHelper
     {
       return;
     }
+
     $post = array(
       'post_content'   => $show['ShowDescription'], //The full text of the post.
       'post_status'    => 'publish', //Set the status of the new post.
@@ -79,6 +97,38 @@ class ImportHelper
       update_post_meta($id, "wpspin_show_showurl", $show['ShowUrl']);
     }
   }
+
+
+
+
+  /**
+   * Update all show descriptions from Spinitron
+   * @param  array  $show [description]
+   * @return [type]       [description]
+   */
+  private function updateShow(array $show)
+  {
+    if ($this->notExists('_wpspin_show_id', $show['ShowID'], 'wpspin_shows'))
+    {
+      $this->createShow($show);
+      return;
+    }
+    $query = $this->query_meta('_wpspin_show_id', $show['ShowID'], 'wpspin_shows');
+    if ($query->have_posts()) {
+      $post = $query->next_post();
+      $content = $post->post_content;
+      $updatedPost = array(
+        'ID' => $post->ID,
+        'post_content' => $show['ShowDescription'],
+        );
+      if (wp_update_post($updatedPost) == 0)
+      {
+        throw new \Exception("Failed to update existing post from new data in Spinitron");
+      }
+
+    }
+  }
+
 
   /**
    * tagifyShowUsers
@@ -135,7 +185,7 @@ class ImportHelper
 
   private function validateShow(array $show)
   {
-    return $this->validate('_wpspin_show_id', $show['ShowID'], 'wpspin_shows');
+    return $this->notExists('_wpspin_show_id', $show['ShowID'], 'wpspin_shows');
   }
 
   /**
@@ -147,7 +197,7 @@ class ImportHelper
 
   private function validateProfile(array $profile)
   {
-    return $this->validate('_wpspin_profile_id', $profile['UserID'], 'wpspin_profiles');
+    return $this->notExists('_wpspin_profile_id', $profile['UserID'], 'wpspin_profiles');
   }
 
   /**
@@ -159,21 +209,27 @@ class ImportHelper
    * @access private
    * @return boolean
    */
-  private function validate($metaKey, $metaValue, $postType)
+  private function notExists($metaKey, $metaValue, $postType)
   {
-    $params = array(
-      'meta_key' => $metaKey,
-      'meta_value' => "{$metaValue}",
-      'meta_compare' => '=',
-      'post_type' => $postType,
-    );
-    $query = new \WP_Query($params);
+    $query = $this->query_meta($metaKey, $metaValue, $postType);
+
     if ($query->have_posts())
     {
       return false;
     }
     return true;
 
+  }
+
+  private function query_meta($metaKey, $metaValue, $postType)
+  {
+    $params = array(
+      'meta_key' => $metaKey,
+      'meta_value' => "{$metaValue}",
+      'meta_compare' => '=',
+      'post_type' => $postType,
+      );
+    return new \WP_Query($params);
   }
 
 }
