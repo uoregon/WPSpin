@@ -57,7 +57,13 @@ class ShowModel extends ModelAbstract
       $show['title'] = $post->post_title;
       $show['image'] = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
       $show['DJProfiles'] = self::getShowDJs($post);
+    } else {
+      $show['title'] = $showinfo[0]['ShowName'];
+      $show['description'] = $showinfo[0]['ShowDescription'];
+      $show['image'] = '';
+      $show['DJProfiles'] = self::getSpinShowDJs($showinfo[0]['ShowUsers']);
     }
+
     return $show;
 
   }
@@ -96,6 +102,30 @@ class ShowModel extends ModelAbstract
     foreach ($showDJs as $dj)
     {
       $djs[] = ProfileModel::getDJInfo($dj['UserID']);
+    }
+    return $djs;
+  }
+
+   /**
+   * getSpinShowDJs
+   *
+   * @param array $post
+   * @static
+   * @access private
+   * @return void
+   */
+  private static function getSpinShowDJs(array $showDJs)
+  {
+    $djs = array();
+    foreach ($showDJs as $dj)
+    {
+      $djs[] = array(
+        'name' => $dj['DJName'],
+        'bio' => '',
+        'facebook' => '',
+        'twitter' => '',
+        'image' => '',
+        );
     }
     return $djs;
   }
