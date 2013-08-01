@@ -75,6 +75,9 @@ class ProfileModel extends ModelAbstract
     $dj['facebook'] = self::getMetaData($post->ID, 'wpspin_profile_facebook');
     $dj['twitter'] = self::getMetaData($post->ID, 'wpspin_profile_twitter');
     $dj['image'] = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+
+    // Generate page link. Format is /wpspin_profiles/lowercase-dj-name
+    $dj['link'] = "wpspin_profiles/" . strtolower(str_replace(' ', '-', $post->post_title));
     return $dj;
   }
 

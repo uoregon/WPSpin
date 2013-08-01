@@ -43,6 +43,7 @@ NowPlaying.Display = (function ($, View, NowPlaying) {
         title: item.title,
         description: item.description,
         image: item.image,
+        link: item.link,
         profiles: item.DJProfiles,
       };
 

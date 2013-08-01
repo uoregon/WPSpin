@@ -56,11 +56,15 @@ class ShowModel extends ModelAbstract
       $show['description'] = $post->post_content;
       $show['title'] = $post->post_title;
       $show['image'] = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+
+      // Generate link. Format is wpspin_shows/lowercase-show-name
+      $show['link'] = "wpspin_shows/" . strtolower(str_replace(' ', '-', $post->post_title));
       $show['DJProfiles'] = self::getShowDJs($post);
     } else {
       $show['title'] = $showinfo[0]['ShowName'];
       $show['description'] = $showinfo[0]['ShowDescription'];
       $show['image'] = '';
+      $show['link'] = '';
       $show['DJProfiles'] = self::getSpinShowDJs($showinfo[0]['ShowUsers']);
     }
 
