@@ -17,10 +17,11 @@ class SpinConnectSingleton {
     $station = SettingsModel::getStation();
     $spinpapiCacheFolder = dirname(__FILE__) . '/../spinpapi/tmp';
     $logerrors = true;
+    $apiVersion = 2;
 
     if (!isset(self::$spinpapi))
     {
-      self::$spinpapi = new \SpinPapiClient($userid, $secret, $station, $logerrors);
+      self::$spinpapi = new \SpinPapiClient($userid, $secret, $station, $logerrors, $apiVersion);
       self::$spinpapi->fcInit($spinpapiCacheFolder);
     }
     return self::$spinpapi;
