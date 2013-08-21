@@ -1,4 +1,4 @@
-<?php
+<?php namespace WPSpin;
 
 // get program schedule from Spinitron
 $station = SettingsModel::getStation();
