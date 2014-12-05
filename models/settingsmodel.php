@@ -1,11 +1,11 @@
 <?php namespace WPSpin;
 /**
  * Setup function. Creates required table if not found.
- * 
+ *
  * @global type $wpdb
  */
 
-class SettingsModel extends ModelAbstract 
+class SettingsModel extends ModelAbstract
 {
 
   public static function getApiKey() {
@@ -44,6 +44,13 @@ class SettingsModel extends ModelAbstract
   public static function getTimezone()
   {
     $options = get_option('wpspin_setting_fields');
+
+    // Give default timezone if option hasn't been set yet
+    if(!$options)
+    {
+      return 'America/Los_Angeles';
+    }
+
     return $options['timezone'];
   }
 
