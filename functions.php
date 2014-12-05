@@ -63,7 +63,7 @@ function scriptRegistry($name_location_array) {
 		wp_deregister_script($name);	
 		wp_register_script($name, $location, array('jquery'));
 		wp_enqueue_script($name);
-    wp_localize_script( $name, 'WPSpinAjax', array( url => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script( $name, 'WPSpinAjax', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
   }
 }
 
