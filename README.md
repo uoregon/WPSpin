@@ -14,7 +14,8 @@ have this and need access, contact [Spinitron](http://spinitron.com).
 
 - Clone or copy project folder into wp-content/plugins directory
 - Install the SpinPapi PHP client by running the commands *git submodule init* and *git submodule update*
-in the WPSpin root directory
+in the WPSpin root directory. Alternately, you can download the client from 
+[Bitbucket](https://bitbucket.org/spinitron/spinpapi-php-client) and place it in this plugin's root directory.
 - Ensure that the WPSpin/spinpapi/tmp folder is writable by the web server user
 - Activate plugin from WordPress plugins screen
 - Click 'Spinitron' in WordPress menu
