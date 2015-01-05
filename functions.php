@@ -9,26 +9,39 @@
    License: GPLv2
    Copyright 2012  University of Oregon (email : emumark@uoregon.edu)
 
-   Permission is hereby granted, free of charge, to any person obtaining a copy 
-   of this software and associated documentation files (the "Software"), to deal 
-   in the Software without restriction, including without limitation the rights 
-   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
-   of the Software, and to permit persons to whom the Software is furnished to do so, 
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+   of the Software, and to permit persons to whom the Software is furnished to do so,
    subject to the following conditions:
 
-   The above copyright notice and this permission notice shall be included in 
+   The above copyright notice and this permission notice shall be included in
    all copies or substantial portions of the Software.
 
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
-   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-//SpinPapi Requires
-require_once 'spinpapi/SpinPapiClient.inc.php';
+// Check for SpinPapi library, warn user if not present.
+if(file_exists(__DIR__ . '/spinpapi/SpinPapiClient.inc.php')) {
+  require_once 'spinpapi/SpinPapiClient.inc.php';
+} else {
+  function spinitron_admin_notice() {
+  ?>
+      <div class="error">
+          <p><?php _e( 'The SpinPapi Client does not appear to be properly
+                        installed. WPSpin will not function properly without this
+                        library. Please see the documentation for more information.'); ?></p>
+      </div>
+      <?php
+  }
+  add_action( 'admin_notices', 'WPSpin\spinitron_admin_notice' );
+}
 
 //Model Requires
 require_once 'models/modelabstract.php';
@@ -60,7 +73,7 @@ add_action( 'widgets_init', 'WPSpin\PlaylistWidgetView::initPlaylistWidget');
 
 function scriptRegistry($name_location_array) {
 	foreach ($name_location_array as $name => $location) {
-		wp_deregister_script($name);	
+		wp_deregister_script($name);
 		wp_register_script($name, $location, array('jquery'));
 		wp_enqueue_script($name);
     wp_localize_script( $name, 'WPSpinAjax', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
@@ -89,8 +102,8 @@ function playlistScripts() {
 	    );
 	scriptRegistry($scripts_array);
 
-}    
- 
+}
+
 add_action('wp_enqueue_scripts', 'WPSpin\playlistScripts');
 
 /**
@@ -117,7 +130,7 @@ function adminMenu()
  * sanitizeSettingsMenu
  *
  * Sanitization callback for settings functions
- * Used to run imports for shows and profiles as well. 
+ * Used to run imports for shows and profiles as well.
  *
  * @param mixed $options
  * @access public
